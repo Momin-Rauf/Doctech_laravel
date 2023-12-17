@@ -99,6 +99,23 @@ export default function Register() {
                     <InputError message={errors.password_confirmation} className="mt-2" />
                 </div>
 
+                <div>
+                    <InputLabel htmlFor="Role" value="Role" />
+
+                    <TextInput
+                        id="role"
+                        name="role"
+                        value={data.role}
+                        className="mt-1 block w-full"
+                        autoComplete="role"
+                        isFocused={true}
+                        onChange={(e) => setData('role', e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.name} className="mt-2" />
+                </div>
+
                 <div className="flex items-center justify-end mt-4">
                     <Link
                         href={route('login')}
@@ -111,6 +128,8 @@ export default function Register() {
                         Register
                     </PrimaryButton>
                 </div>
+
+                
             </form>
         </GuestLayout>
     );
