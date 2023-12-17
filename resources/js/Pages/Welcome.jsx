@@ -16,8 +16,21 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                 className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
             >
                 Log in
-            </Link></div>
+            </Link>
+            
+            <Link
+                href={route("register")}
+                className="font-semibold text-gray-600 ml-12 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+            >
+                Sign Up
+            </Link>
+            
+            </div>
+            
                 </div>
+
+
+                
 
                 <div className='h-screen'>
         <h1 className="z-10 absolute font-bold top-[10%] underline text-[55px] left-10 font-sans" >DOCTECH</h1>
