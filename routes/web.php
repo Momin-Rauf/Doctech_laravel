@@ -31,6 +31,8 @@ Route::get('/', function () {
 
 Route::middleware(['auth','role:admin'])->group(function(){
     Route::get('/admin',[AdminController::class,'admin'])->name('admin.dashboard');
+    
+    Route::post('/admin',[AdminController::class,'storePatientData'])->name('admin.store');
 });
 
 

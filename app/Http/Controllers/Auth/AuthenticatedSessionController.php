@@ -42,6 +42,9 @@ class AuthenticatedSessionController extends Controller
         elseif($request->user()->role === 'patient'){
             $url = '/patient';
         }
+        else{
+            $url='/Welcome';
+        }
 
         $request->session()->regenerate();
 
