@@ -43,7 +43,7 @@ class AuthenticatedSessionController extends Controller
             $url = '/patient';
         }
         else{
-            $url='/Welcome';
+            $url='/';
         }
 
         $request->session()->regenerate();

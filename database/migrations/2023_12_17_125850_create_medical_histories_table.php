@@ -21,7 +21,7 @@ class CreateMedicalHistoriesTable extends Migration
             $table->timestamps();
 
             // Define foreign key relationship
-            $table->foreign('patient_id')->references('id')->on('users');
+            $table->foreign('patient_id')->references('id')->on('patients');
         });
     }
 

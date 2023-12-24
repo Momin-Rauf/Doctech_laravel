@@ -31,8 +31,28 @@ Route::get('/', function () {
 
 Route::middleware(['auth','role:admin'])->group(function(){
     Route::get('/admin',[AdminController::class,'admin'])->name('admin.dashboard');
-    
-    Route::post('/admin',[AdminController::class,'storePatientData'])->name('admin.store');
+    Route::post('/admin/update',[AdminController::class,'editPatientData'])->name('admin.updateData');
+    Route::post('/admin/logout',[AdminController::class,'logout'])->name('Logout');
+    Route::get('/admin/mh',[AdminController::class,'show_mh'])->name('admin.show_mh');
+    Route::get('/admin/Dredit',[AdminController::class,'show_Dr_edit'])->name('show_dr_edit');
+    Route::get('/admin/Dr',[AdminController::class,'show_Dr'])->name('show_dr_page');
+    Route::get('/admin/edit',[AdminController::class,'show_edit'])->name('admin.show_edit');
+    Route::post('/admin/ad_mh',[AdminController::class,'add_mh'])->name('admin.add_mh');
+    Route::post('/admin/edit',[AdminController::class,'editDoctorData'])->name('admin.updateDoctor');
+    Route::post('/admin/create',[AdminController::class,'create'])->name('admin.create');
+    Route::post('/admin/createDoc',[AdminController::class,'createDoc'])->name('admin.createDoc');
+    Route::get('/admin/user',[AdminController::class,'userAdmin'])->name('userAdmin');
+    Route::post('/admin/treatment',[AdminController::class,'treatment'])->name('treatment');
+    Route::get('/admin/dr',[AdminController::class,'doctorAdmin'])->name('doctorAdmin');
+
+    Route::get('/admin/patents',[AdminController::class,'ShowAllPatients'])->name('admin.ShowAllPatients');
+    Route::get('/admin/view',[AdminController::class,'ShowAllDoctors'])->name('admin.ShowAllDoctors');
+    Route::get('/admin/view',[AdminController::class,'AllDoctorsViewPage'])->name('admin.AllDoctorsViewPage');
+    Route::get('/admin/doctors',[AdminController::class,'AllpatientsViewPage'])->name('admin.AllpatientsViewPage');
+
+
+
+
 });
 
 

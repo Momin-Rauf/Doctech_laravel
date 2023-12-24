@@ -17,19 +17,7 @@ class UsersTableSeeder extends Seeder
     {
         // Example data for seeding
         $user = [
-            [
-                'name'=>'umer',
-                'email'=>'umer@gmail.com',
-                'password' =>Hash::make('umer123'),
-                'role' => 'doctor',
-            ],
             
-            [
-                'name'=>'Ali',
-                'email'=>'Ali@gmail.com',
-                'password' =>Hash::make('Ali123'),
-                'role' => 'doctor',
-            ],
             [
                 'name'=>'Admin',
                 'email'=>'admin@gmail.com',

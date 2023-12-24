@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class MedicalHistory extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'family_problem', 'patient_id', 'patient_diseases',
+    ];
 }
