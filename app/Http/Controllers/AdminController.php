@@ -5,6 +5,8 @@ use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\Patient;
 
+use App\Models\Service;
+use App\Models\Faq;
 use App\Models\Doctor;
 
 use App\Models\MedicalHistory;
@@ -18,7 +20,18 @@ class AdminController extends Controller
 {
     //this function rendesr the rect page when admin is authenticated
     public function admin(){
+        
         return Inertia::render('admin/admin_dashboard');
+    }
+
+    public function  welcome(){
+        $faq = Faq::all();
+        $service = Service::all();
+        return Inertia::render('Welcome', [
+            
+            'service'=>$service,
+            'faq' => $faq,
+        ]);
     }
     
     //This function displays patient Panel to the Admin

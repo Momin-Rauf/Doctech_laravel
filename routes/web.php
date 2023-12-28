@@ -105,15 +105,16 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
 
+Route::get('/',[AdminController::class,'welcome'])->name('welcome');
 Route::middleware(['auth','role:admin'])->group(function(){
     Route::get('/admin',[AdminController::class,'admin'])->name('admin.dashboard');
     Route::post('/admin/update',[AdminController::class,'editPatientData'])->name('admin.updateData');
@@ -129,7 +130,6 @@ Route::middleware(['auth','role:admin'])->group(function(){
     Route::get('/admin/user',[AdminController::class,'userAdmin'])->name('userAdmin');
     Route::post('/admin/treatment',[AdminController::class,'treatment'])->name('treatment');
     Route::get('/admin/dr',[AdminController::class,'doctorAdmin'])->name('doctorAdmin');
-
     Route::get('/admin/patents',[AdminController::class,'ShowAllPatients'])->name('admin.ShowAllPatients');
     Route::get('/admin/view',[AdminController::class,'ShowAllDoctors'])->name('admin.ShowAllDoctors');
     Route::get('/admin/view',[AdminController::class,'AllDoctorsViewPage'])->name('admin.AllDoctorsViewPage');
@@ -161,7 +161,7 @@ Route::middleware(['auth','role:doctor'])->group(function(){
 
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('/Welcome');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
