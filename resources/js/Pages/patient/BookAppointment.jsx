@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import Tilt from 'react-parallax-tilt';
 import {
     Carousel,
     CarouselContent,
@@ -9,15 +10,15 @@ import {
 import DoctorCard from './DoctorCard'
   
 
-const BookAppointment = ({doctorData}) => {
+const BookAppointment = ({doctorData,doctor}) => {
     
   return (
     <>
         
-        <Carousel className="flex flex-col w-[100%] p-4 justify-center items-center" >
+        <Carousel  className="flex flex-col w-[100%] p-4 justify-center items-center" >
   <CarouselPrevious className="absolute top-[50%] z-10 left-[10%] "  />
   <CarouselContent>
-    {doctorData.map((D,index)=><CarouselItem index className="h-96 w-44  text-white " ><DoctorCard Data={D} /></CarouselItem>
+    {doctorData.map((D)=><CarouselItem  className="h-96 w-96 py-12 px-16    text-white " ><Tilt><DoctorCard doctor={doctor} Data={D} /></Tilt></CarouselItem>
     )}
     
   </CarouselContent>

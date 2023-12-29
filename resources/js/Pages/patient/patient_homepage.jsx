@@ -52,10 +52,11 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import { SlCalender } from "react-icons/sl";
 import { Input } from "@/components/ui/input";
 
 import { useForm } from "@inertiajs/inertia-react";
-import { BookAudio } from "lucide-react";
+
 import BookAppointment from "./BookAppointment";
 
 const PatientHomepage = ({
@@ -67,6 +68,7 @@ const PatientHomepage = ({
     mustVerifyEmail,
     status,
     doctorData,
+    doctor,
 }) => {
 
     const [User, setUser] = useState([]);
@@ -160,7 +162,7 @@ const PatientHomepage = ({
   <Button style={{ boxShadow: "0px 0px 2px white" }} className="absolute top-[70%]   text-white  hover:text-black hover:bg-white right-[47%]" >Book Appointment</Button>
 </ScrollLink>
 
-                <div>
+                <div className="text-white     hover:text-gray-500 h-10" >
                     <Sheet>
                         <SheetTrigger>
                             <CiUser
@@ -168,6 +170,8 @@ const PatientHomepage = ({
                                 className=" shadow-white rounded-[20px] w-10 h-10 p-2 hover:scale-105  "
                                 size={40}
                             />
+                            <b className="hover:underline transition-all underline-offset-4" />
+                            
                         </SheetTrigger>
                         <SheetContent>
                             <SheetHeader>
@@ -179,15 +183,43 @@ const PatientHomepage = ({
                         </SheetContent>
                     </Sheet>
                 </div>
+
+                <div className="text-white hover:text-gray-500  h-10" >
+                    <Sheet>
+                        <SheetTrigger>
+                            <div className="flex justify-center items-center flex-col" >
+                            <SlCalender 
+                                style={{ boxShadow: "0px 0px 2px white" }}
+                                className=" shadow-white  rounded-[20px]  w-14 h-10 p-2 hover:scale-105  "
+                                size={40}
+                            />
+                            <b className="hover:underline transition-all underline-offset-4" >Appointments</b>
+                            </div>
+                        </SheetTrigger>
+                        <SheetContent>
+                            <SheetHeader>
+                                <SheetTitle>Appointments</SheetTitle>
+                                <SheetDescription>
+                                    Here you will see you appointments
+                                </SheetDescription>
+                            </SheetHeader>
+                        </SheetContent>
+                    </Sheet>
+                </div>
+
+
+
+
                 <div className="hover:underline text-white hover:text-gray-500 h-10">
                     <Sheet>
                         <SheetTrigger>
                             <FaEdit
                                 style={{ boxShadow: "0px 0px 2px white" }}
-                                className=" shadow-white rounded-[20px] w-10 h-10 p-2 hover:scale-105  "
+                                className=" shadow-white rounded-[20px] w-14 h-10 p-2 hover:scale-105  "
                                 size={35}
                             />
-                            Edit
+                            <b className="hover:underline transition-all underline-offset-4" >Edit</b>
+                            
                         </SheetTrigger>
                         <SheetContent>
                             <SheetHeader>
@@ -428,9 +460,8 @@ const PatientHomepage = ({
             <h2 className="scroll-m-20 border-b text-white pb-2 text-3xl font-semibold tracking-tight first:mt-0">
                     Book your next appointment
     </h2>
-            <div id="appointment" className="h-[70vh] w-[80%] bg-[#253766] mb-10 mt-4 rounded-lg shadow-sm shadow-white " >
-              <BookAppointment doctorData={doctorData} />
-            </div>
+              <BookAppointment  doctorData={doctorData} doctor={doctor} />
+            
             </div>
         </div>
     );

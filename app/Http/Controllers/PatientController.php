@@ -33,13 +33,14 @@ class PatientController extends Controller
         
         $userID = User::where('id',$id)->first();
         $userDetails = Patient::where('user_id',$id)->first();
-        // return response()->json($docData);
+        $doctor = User::where('role','=','doctor')->get();
+        // return response()->json($doctor);
         return Inertia::render('patient/patient_homepage',
         [
             'user' => [$userID],
             'userData'=> [$userDetails],
             
-        
+        'doctor'=>$doctor,
         'Sugar' =>$sugarData,
         'Bp' => $bpData,
         'prescriptions' => $prescriptionData,
