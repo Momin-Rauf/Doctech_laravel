@@ -147,6 +147,11 @@ Route::middleware(['auth','role:patient'])->group(function(){
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/sugar', [PatientController::class, 'saveSugar'])->name('sugar');
+    Route::post('/bp', [PatientController::class, 'saveBp'])->name('Bp');
+    Route::post('/appoint', [PatientController::class, 'getId'])->name('appoint');
+    
+
 
 });
 
@@ -161,7 +166,7 @@ Route::middleware(['auth','role:doctor'])->group(function(){
 
 
 Route::get('/dashboard', function () {
-    return Inertia::render('/Welcome');
+    return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

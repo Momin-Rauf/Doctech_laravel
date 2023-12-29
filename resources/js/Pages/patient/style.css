@@ -1,0 +1,19 @@
+@keyframes slowBounce {
+   0%{
+    transform: translateY(2px) scale(1.05);
+   }
+  }
+  
+  /* Apply the slowBounce animation to an element */
+  #brain {
+    animation: slowBounce 2s infinite;
+  }
+  
+  #brain:hover{
+    animation: slowBounce 1s infinite; 
+
+  }
+
+  p{
+    line-height: 0px;
+  }

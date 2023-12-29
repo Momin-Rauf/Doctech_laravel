@@ -1,117 +1,450 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from '@inertiajs/react';
-import Tilt from 'react-parallax-tilt';
-import UserCard from './UserCard';
+import React, { useEffect, useState } from "react";
+import { Link } from "@inertiajs/react";
+import Tilt from "react-parallax-tilt";
+import { FaEdit } from "react-icons/fa";
+import {Link as ScrollLink } from 'react-scroll';
+import UserCard from "./UserCard";
+import "./style.css";
+import Hand from "../images/hand .png";
+import brain from "../images/brain.png";
+import { Button } from "@/Components/ui/button";
+import UpdatePasswordForm from "../Profile/Partials/UpdatePasswordForm";
+import {
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerDescription,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger,
+} from "@/components/ui/drawer";
 
-const PatientHomepage = ({ user, userData, Bp, Sugar, prescriptions }) => {
-  const [User, setUser] = useState([]);
-  const [BpReadings, setBpReadings] = useState([]);
-  const [SugarLevels, setSugarLevels] = useState([]);
-  const [Prescriptions, setPrescriptions] = useState([]);
-  const [UserData, setUserData] = useState([]);
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet";
 
-  useEffect(() => {
-    const fetch = () => {
-      setUser(user);
-      setUserData(userData);
-      setBpReadings(Bp);
-      setSugarLevels(Sugar);
-      setPrescriptions(prescriptions);
+import UpdateProfileInformationForm from "../Profile/Partials/UpdateProfileInformationForm";
+import { CiUser } from "react-icons/ci";
+import {
+    Menubar,
+    MenubarContent,
+    MenubarItem,
+    MenubarMenu,
+    MenubarSeparator,
+    MenubarShortcut,
+    MenubarTrigger,
+} from "@/components/ui/menubar";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Label } from "@/components/ui/label";
+
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
+import { Input } from "@/components/ui/input";
+
+import { useForm } from "@inertiajs/inertia-react";
+import { BookAudio } from "lucide-react";
+import BookAppointment from "./BookAppointment";
+
+const PatientHomepage = ({
+    user,
+    userData,
+    Bp,
+    Sugar,
+    prescriptions,
+    mustVerifyEmail,
+    status,
+    doctorData,
+}) => {
+
+    const [User, setUser] = useState([]);
+    const [BpReadings, setBpReadings] = useState([]);
+    const [SugarLevels, setSugarLevels] = useState([]);
+    const [Prescriptions, setPrescriptions] = useState([]);
+    const [UserData, setUserData] = useState([]);
+    const { data, setData, post, processing, errors, reset } = useForm({
+        id: "",
+        SugarDate: "",
+        BpDate: "",
+        Time: "",
+        SugarValue: "",
+        Diastolic: "",
+        Systolic: "",
+    });
+
+    useEffect(() => {
+        const fetch = () => {
+            setUser(user);
+            setUserData(userData);
+            setBpReadings(Bp);
+            setSugarLevels(Sugar);
+            setPrescriptions(prescriptions);
+        };
+
+        fetch();
+    }, [user, userData, Bp, Sugar, prescriptions]);
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        post(route("Bp"));
     };
 
-    fetch();
-  }, [user, userData, Bp, Sugar, prescriptions]);
+    const submitHandlerSugar = (e) => {
+        e.preventDefault();
+        post(route("sugar"));
+    };
+    const [para, setPara] = useState("");
 
-  return (
-    <div className="bg-[rgb(50,198,154)] h-[100vh] min-h-[100vh]">
-      <div className="bg-[rgb(50,198,15)] h-[10%] flex flex-row m-auto justify-between items-center">
-        <Link href={route('profile.edit')}>Profile</Link>
-      </div>
+    const [colors, setColor] = useState("");
+    let i = 0;
+    useEffect(() => {
+        let color = ["white", "yellow"];
+        let words = [
+            "Book your Appointment",
+            "Track your Health",
+            "Chat with experts",
+        ];
+        let i = 0;
+        let x = 0;
+        const intervalId = setInterval(() => {
+            setPara(words[i]);
+            setColor(color[x]);
+           
+            x = (x + 1) % color.length;
+            i = (i + 1) % words.length;
+        }, 2000);
 
-      <Tilt tiltMaxAngleX={0.5} tiltMaxAngleY={1.5}>
-        <UserCard UserData={UserData} User={User} />
-      </Tilt>
+        // Clean up the interval when the component unmounts
+        return () => clearInterval(intervalId);
+    }, []);
 
-<div className="col-span-full md:col-span-1 lg:col-span-1">
-  <h2 className="text-xl font-bold mb-4 text-white">Blood Pressure Readings</h2>
-  <div className="bg-white rounded-md overflow-hidden shadow-md">
-    <table className="min-w-full">
-      <thead className="bg-[rgb(50,198,154)] text-white">
-        <tr>
-          <th className="py-2 px-4">Date</th>
-          <th className="py-2 px-4">Time</th>
-          <th className="py-2 px-4">Systolic</th>
-          <th className="py-2 px-4">Diastolic</th>
-        </tr>
-      </thead>
-      <tbody>
-        {BpReadings.map((reading) => (
-          <tr key={reading.id} className="border-t">
-            <td className="py-2 px-4">{reading.date}</td>
-            <td className="py-2 px-4">{reading.time}</td>
-            <td className="py-2 px-4">{reading.systolic}</td>
-            <td className="py-2 px-4">{reading.diastolic}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-</div>
+    return (
+        <div className="bg-[#172545]  h-[100vh]">
+            <div className="h-[100vh] text-white flex flex-row-reverse gap-10 p-4 ">
+                <div>
+                    <h1 className="top-[20%] left-[40%] absolute  pb-2 text-[86px] no-underline font-semibold tracking-tight  first:mt-0">
+                        DOCTECH
+                    </h1>
+                    <h2
+                        style={{ color: `${colors}` }}
+                        className={`scroll-m-20 top-[40%] left-[40%] absolute border-b pb-2 text-3xl font-semibold tracking-tight  first:mt-0`}
+                    >
+                        {para}
+                    </h2>
+                </div>
+                <img
+                    src={Hand}
+                    className="absolute left-10  animate-pulse"
+                    alt=""
+                />
+                <img
+                    id="brain"
+                    src={brain}
+                    className="absolute left-16 h-[400px] bottom-48 "
+                    alt=""
+                />
 
-<div className="col-span-full md:col-span-1 lg:col-span-1">
-  <h2 className="text-xl font-bold mb-4 text-white">Sugar Levels</h2>
-  <div className="bg-white rounded-md overflow-hidden shadow-md">
-    <table className="min-w-full">
-      <thead className="bg-[rgb(50,198,154)] text-white">
-        <tr>
-          <th className="py-2 px-4">Date</th>
-          <th className="py-2 px-4">Time</th>
-          <th className="py-2 px-4">Sugar Level</th>
-        </tr>
-      </thead>
-      <tbody>
-        {SugarLevels.map((reading) => (
-          <tr key={reading.id} className="border-t">
-            <td className="py-2 px-4">{reading.date}</td>
-            <td className="py-2 px-4">{reading.time}</td>
-            <td className="py-2 px-4">{reading.sugar_level}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-</div>
+<ScrollLink to="appointment" delay={500} smooth={true}>
+  <Button style={{ boxShadow: "0px 0px 2px white" }} className="absolute top-[70%]   text-white  hover:text-black hover:bg-white right-[47%]" >Book Appointment</Button>
+</ScrollLink>
 
-<div className="col-span-full">
-  <h2 className="text-xl font-bold mb-4 text-white">Prescriptions</h2>
-  <div className="bg-white rounded-md overflow-hidden shadow-md">
-    <table className="min-w-full">
-      <thead className="bg-[rgb(50,198,154)] text-white">
-        <tr>
-          <th className="py-2 px-4">Date</th>
-          <th className="py-2 px-4">Medicine Name</th>
-          <th className="py-2 px-4">Dose</th>
-          <th className="py-2 px-4">Frequency</th>
-          <th className="py-2 px-4">Done</th>
-        </tr>
-      </thead>
-      <tbody>
-        {Prescriptions.map((prescription) => (
-          <tr key={prescription.id} className="border-t">
-            <td className="py-2 px-4">{prescription.created_at}</td>
-            <td className="py-2 px-4">{prescription.medicine_name}</td>
-            <td className="py-2 px-4">{prescription.dose}</td>
-            <td className="py-2 px-4">{prescription.frequency}</td>
-            <td className="py-2 px-4">{prescription.done}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-</div>
+                <div>
+                    <Sheet>
+                        <SheetTrigger>
+                            <CiUser
+                                style={{ boxShadow: "0px 0px 2px white" }}
+                                className=" shadow-white rounded-[20px] w-10 h-10 p-2 hover:scale-105  "
+                                size={40}
+                            />
+                        </SheetTrigger>
+                        <SheetContent>
+                            <SheetHeader>
+                                <SheetTitle>User</SheetTitle>
+                                <SheetDescription>
+                                    <UserCard UserData={UserData} User={User} />
+                                </SheetDescription>
+                            </SheetHeader>
+                        </SheetContent>
+                    </Sheet>
+                </div>
+                <div className="hover:underline text-white hover:text-gray-500 h-10">
+                    <Sheet>
+                        <SheetTrigger>
+                            <FaEdit
+                                style={{ boxShadow: "0px 0px 2px white" }}
+                                className=" shadow-white rounded-[20px] w-10 h-10 p-2 hover:scale-105  "
+                                size={35}
+                            />
+                            Edit
+                        </SheetTrigger>
+                        <SheetContent>
+                            <SheetHeader>
+                                <SheetTitle>Update User Form</SheetTitle>
+                                <SheetDescription>
+                                    <Tabs
+                                        defaultValue="account"
+                                        className="w-[400px]"
+                                    >
+                                        <TabsList>
+                                            <TabsTrigger value="account">
+                                                Account
+                                            </TabsTrigger>
+                                            <TabsTrigger value="password">
+                                                Password
+                                            </TabsTrigger>
+                                        </TabsList>
+                                        <TabsContent value="account">
+                                            <UpdateProfileInformationForm />
+                                        </TabsContent>
+                                        <TabsContent value="password">
+                                            <UpdatePasswordForm />
+                                        </TabsContent>
+                                    </Tabs>
+                                </SheetDescription>
+                            </SheetHeader>
+                        </SheetContent>
+                    </Sheet>
+                </div>
+            </div>
 
-    </div>
-  );
+            <div className="p-4 text-white  bg-[#20315b] ">
+                <h1>Blood presure</h1>
+                <Table>
+                    <TableCaption>Blood Pressure Chart.</TableCaption>
+                    <TableHeader>
+                        <TableRow className="bg-black text-white">
+                            <TableHead className="w-[100px]">Date</TableHead>
+                            <TableHead>Time</TableHead>
+                            <TableHead>Systolic</TableHead>
+                            <TableHead className="text-right">
+                                Diastolic
+                            </TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {BpReadings.map((reading) => (
+                            <TableRow key={reading.id} className="border-t">
+                                <TableCell className="font-medium ">
+                                    {reading.date}
+                                </TableCell>
+                                <TableCell className="font-medium">
+                                    {reading.time}
+                                </TableCell>
+                                <TableCell className="font-medium">
+                                    {reading.systolic}
+                                </TableCell>
+                                <TableCell className="font-medium">
+                                    {reading.diastolic}
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+
+                <Drawer>
+                    <DrawerTrigger>Open</DrawerTrigger>
+                    <DrawerContent>
+                        <DrawerHeader>
+                            <DrawerTitle>
+                                Please Add Blood Pressure Data:
+                            </DrawerTitle>
+                            <DrawerDescription></DrawerDescription>
+                        </DrawerHeader>
+                        <form onSubmit={submitHandler}>
+                            <DrawerFooter>
+                                <Label htmlFor="diastolic">Systolic</Label>
+                                <Input
+                                    value={data.Systolic}
+                                    onChange={(e) => {
+                                        setData("Systolic", e.target.value);
+                                    }}
+                                    type="text"
+                                    placeholder="Systolic"
+                                />
+
+                                <Label htmlFor="systolic">Diastolic</Label>
+                                <Input
+                                    value={data.Diastolic}
+                                    onChange={(e) => {
+                                        setData("Diastolic", e.target.value);
+                                    }}
+                                    type="text"
+                                    placeholder="Diastolic"
+                                />
+                                <input
+                                    value={data.BpDate}
+                                    onChange={(e) => {
+                                        setData("BpDate", e.target.value);
+                                    }}
+                                    type="date"
+                                />
+                                <input
+                                    value={data.Time}
+                                    onChange={(e) => {
+                                        setData("Time", e.target.value);
+                                    }}
+                                    type="time"
+                                />
+
+                                <button
+                                    type="submit"
+                                    className="w-24 p-4 bg-blue"
+                                >
+                                    Submit{" "}
+                                </button>
+                                <DrawerClose>
+                                    <Button variant="outline">Cancel</Button>
+                                </DrawerClose>
+                            </DrawerFooter>
+                        </form>
+                    </DrawerContent>
+                </Drawer>
+            </div>
+
+            <div className="p-4 text-white  bg-[#20315b] ">
+                <h1>Sugar</h1>
+                <Table>
+                    <TableCaption>Sugar Chart.</TableCaption>
+                    <TableHeader>
+                        <TableRow className="bg-black text-white">
+                            <TableHead className="w-[100px]">Date</TableHead>
+                            <TableHead>Time</TableHead>
+                            <TableHead>Sugar level</TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {SugarLevels.map((reading) => (
+                            <TableRow key={reading.id} className="border-t">
+                                <TableCell className="font-medium ">
+                                    {reading.date}
+                                </TableCell>
+                                <TableCell className="font-medium">
+                                    {reading.time}
+                                </TableCell>
+                                <TableCell className="font-medium">
+                                    {reading.sugar_level}
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+
+                <Drawer>
+                    <DrawerTrigger>Open</DrawerTrigger>
+                    <DrawerContent>
+                        <DrawerHeader>
+                            <DrawerTitle>Please Add Sugar Data:</DrawerTitle>
+                            <DrawerDescription></DrawerDescription>
+                        </DrawerHeader>
+                        <form onSubmit={submitHandlerSugar}>
+                            <DrawerFooter>
+                                <Label htmlFor="diastolic">Systolic</Label>
+                                <Input
+                                    value={data.SugarValue}
+                                    onChange={(e) => {
+                                        setData("SugarValue", e.target.value);
+                                    }}
+                                    type="text"
+                                    placeholder="Systolic"
+                                />
+
+                                <input
+                                    value={data.SugarDate}
+                                    onChange={(e) => {
+                                        setData("SugarDate", e.target.value);
+                                    }}
+                                    type="date"
+                                />
+                                <input
+                                    value={data.Time}
+                                    onChange={(e) => {
+                                        setData("Time", e.target.value);
+                                    }}
+                                    type="time"
+                                />
+
+                                <button
+                                    type="submit"
+                                    className="w-24 p-4 bg-blue"
+                                >
+                                    Submit{" "}
+                                </button>
+                                <DrawerClose>
+                                    <Button variant="outline">Cancel</Button>
+                                </DrawerClose>
+                            </DrawerFooter>
+                        </form>
+                    </DrawerContent>
+                </Drawer>
+            </div>
+
+            <div className="p-4 text-white  bg-[#20315b] ">
+                <h1>Prescriptions</h1>
+                <Table>
+                    <TableCaption>Prescriptions</TableCaption>
+                    <TableHeader>
+                        <TableRow className="bg-black text-white">
+                            <TableHead className="w-[100px]">Date</TableHead>
+                            <TableHead>Medicine Name</TableHead>
+                            <TableHead>Medicine Dose</TableHead>
+
+                            <TableHead>Medicine Frquency</TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {prescriptions.map((reading) => (
+                            <TableRow key={reading.id} className="border-t">
+                                <TableCell className="font-medium ">
+                                    {reading.created_at}
+                                </TableCell>
+                                <TableCell className="font-medium">
+                                    {reading.medicine_name}
+                                </TableCell>
+                                <TableCell className="font-medium">
+                                    {reading.dose}
+                                </TableCell>
+                                <TableCell className="font-medium">
+                                    {reading.done}
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </div>
+
+            <div className="bg-[#20315b] flex flex-col justify-center items-center" >
+            <h2 className="scroll-m-20 border-b text-white pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+                    Book your next appointment
+    </h2>
+            <div id="appointment" className="h-[70vh] w-[80%] bg-[#253766] mb-10 mt-4 rounded-lg shadow-sm shadow-white " >
+              <BookAppointment doctorData={doctorData} />
+            </div>
+            </div>
+        </div>
+    );
+
+
+
+
+
+
+
+
+
+
+
 };
 
 export default PatientHomepage;

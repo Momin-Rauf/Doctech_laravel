@@ -29,11 +29,11 @@ class PatientController extends Controller
 
 
 
-
+        $docData = Doctor::all();
         
         $userID = User::where('id',$id)->first();
         $userDetails = Patient::where('user_id',$id)->first();
-        // return response()->json($userID);
+        // return response()->json($docData);
         return Inertia::render('patient/patient_homepage',
         [
             'user' => [$userID],
@@ -43,8 +43,41 @@ class PatientController extends Controller
         'Sugar' =>$sugarData,
         'Bp' => $bpData,
         'prescriptions' => $prescriptionData,
+        'doctorData' => $docData,
         ]
     );
     }
 
+    public function getId(Request $request){
+        $patient = Patient::where('user_id',auth()->user()->id)->get();
+        Appointment::create([
+            'doctor_id'=> $request->id ,
+            'patient_id'=>$patient,
+            'appointment_date'=>now(),
+        ]);
+    }
+
+    public function saveSugar(Request $request){
+        $patient = Patient::where('user_id',auth()->user()->id)->first();
+        
+        Sugar::create([
+            'patient_id'=>$patient->id,
+            'sugar_level'=>$request->SugarValue,
+            'time'=>$request->Time,
+            'date'=>$request->SugarDate,
+        ]);
+
+}
+
+    public function saveBp(Request $request){
+        $patient = Patient::where('user_id',auth()->user()->id)->first();
+        
+        Bp::create([
+            'patient_id'=>$patient->id,
+            'systolic'=>$request->Systolic,
+            'diastolic'=>$request->Diastolic,
+            'time'=>$request->Time,
+            'date'=>$request->BpDate,
+        ]);
+    }
 }
