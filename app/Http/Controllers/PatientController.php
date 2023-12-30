@@ -100,4 +100,6 @@ class PatientController extends Controller
 
         return redirect('/');
     }
+
+    
 }

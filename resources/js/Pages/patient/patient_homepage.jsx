@@ -214,7 +214,17 @@ const PatientHomepage = ({
                     </Sheet>
                 </div>
 
+                <div className="flex absolute right-[35%] justify-center items-center flex-col" >
+                            <SlCalender 
+                                href={route('showAppointment')}
+                                style={{ boxShadow: "0px 0px 2px white" }}
+                                className=" shadow-white  rounded-[20px]  w-14 h-10 p-2 hover:scale-105  "
+                                size={40}
+                            >
 
+                            </SlCalender>
+                            <Link href={route('chatify')} className="hover:underline transition-all underline-offset-4" >Chats</Link>
+                            </div>
 
 
                 <div className="hover:underline text-white hover:text-gray-500 h-10">

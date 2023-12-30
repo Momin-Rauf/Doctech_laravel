@@ -92,6 +92,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Middleware\Role;
+
+use Chatify\Http\Controllers\ChatifyController;
 use Inertia\Inertia;
 
 /*
@@ -156,6 +158,9 @@ Route::middleware(['auth','role:patient'])->group(function(){
     
 
 
+});
+Route::group(config('chatify.routes'), function () {
+    Route::get('/chatify', [ChatifyController::class, 'index'])->name('chatify');
 });
 
 
