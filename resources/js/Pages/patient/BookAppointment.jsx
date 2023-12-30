@@ -15,10 +15,10 @@ const BookAppointment = ({doctorData,doctor}) => {
   return (
     <>
         
-        <Carousel  className="flex flex-col w-[100%] p-4 justify-center items-center" >
+        <Carousel  className="flex md:flex-col md:w-[100%] p-4 justify-center items-center" >
   <CarouselPrevious className="absolute top-[50%] z-10 left-[10%] "  />
   <CarouselContent>
-    {doctorData.map((D,index)=><CarouselItem key={index}  className="h-96 w-96 py-12 px-16    text-white " ><Tilt><DoctorCard doctor={doctor} Data={D} /></Tilt></CarouselItem>
+    {doctorData.map((D,index)=><CarouselItem key={index}  className="h-96 md:w-96 w-48 md:py-12 md:px-16    text-white " ><Tilt><DoctorCard doctor={doctor} Data={D} /></Tilt></CarouselItem>
     )}
     
   </CarouselContent>

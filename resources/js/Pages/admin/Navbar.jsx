@@ -1,3 +1,4 @@
+// importing the components
 import React from 'react';
 import Tilt from 'react-parallax-tilt';
 import { Link } from '@inertiajs/inertia-react';  // Update the import statement
@@ -5,16 +6,20 @@ import { useForm } from '@inertiajs/inertia-react'; // Update the import stateme
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 const Navbar = ({ click }) => {
+// This component is navbar component which is imported in all other components
+
   const { post } = useForm();
+  // extracted the post method from useform provided by inertia
 
   const logout = () => {
+  // function used to logout the admin
     post(route('Logout'));
   };
 
   return (
+    
+    // 
     <nav className="h-[80px] bg-blue-500 gap-12 flex flex-row p-7">
-      
-        
       <button onClick={() => click()}>Side</button>
       <div className="flex flex-row">
         <Tilt glareColor={'lightblue'}>

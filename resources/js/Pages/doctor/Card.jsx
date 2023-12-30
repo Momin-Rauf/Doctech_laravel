@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Card = ({ doctor, Dr }) => {
+  // this card component is used to display the Doctor data
   return (
     <div className="bg-white p-8 rounded shadow-lg max-w-md mx-auto">
       <h3 className="text-xl font-semibold mb-4">Doctor Information</h3>

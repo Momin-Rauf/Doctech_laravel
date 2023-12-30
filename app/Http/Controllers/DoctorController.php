@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Patient;
 use App\Models\Doctor;
 
+use App\Models\MedicalHistory;
+
 use App\Models\Prescription;
 use App\Models\TestReport;
 use App\Models\Bp;
@@ -24,7 +26,7 @@ class DoctorController extends Controller
         $appointments = Appointment::where('doctor_id',$doctor_id->id)->get();
         $patient = Patient::all();
         $user = User::where('role','patient')->get();
-        // return response()->json($patient);
+        // return response()->json($Dr);
         return Inertia::render('doctor/dr_homepage',['Dr'=>$Dr,'appointment'=>$appointments,'user'=>$user,'patientDetails'=>$patient,'doc'=>$doctor_id]);
     }
 
@@ -51,7 +53,8 @@ class DoctorController extends Controller
     $bpData = Bp::where('patient_id', $patientData->id)->get();
     $prescriptionData = Prescription::where('patient_id', $patientData->id)->get();
     $testData = TestReport::where('patient_id', $patientData->id)->get();
-
+    // $medical = MedicalHistory::where('patient_id', $patientData->id)->first();
+    // return response()->json($medical);
     $responseData = [
         'patient' => $patients,
         'pData' => $patientData,
@@ -59,6 +62,7 @@ class DoctorController extends Controller
         'Bp' => $bpData,
         'prescriptions' => $prescriptionData,
         'testData' => $testData,
+        'Dr'=>'',
     ];
     return Inertia::render('doctor/dr_homepage',$responseData);
 }

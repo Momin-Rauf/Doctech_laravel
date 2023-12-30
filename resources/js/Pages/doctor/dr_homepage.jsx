@@ -22,7 +22,10 @@ import UpdatePasswordForm from '../Profile/Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from '../Profile/Partials/UpdateProfileInformationForm';
 import { useEffect } from 'react';
 import { set } from 'react-hook-form';
-const DrHomepage = ({ patient, pData, Sugar,doc,Dr, Bp, prescriptions ,patientDetails, appointment,user }) => {
+
+
+// This doctor homepage is main homepage of user which is used to display the 
+const DrHomepage = ({ patient,pData, Sugar,doc,Dr, Bp, prescriptions ,patientDetails, appointment,user }) => {
   
   const [view, setView] = useState(false);
   const { data, setData, post } = useForm({
@@ -38,6 +41,9 @@ const DrHomepage = ({ patient, pData, Sugar,doc,Dr, Bp, prescriptions ,patientDe
 
   return (
     <>
+
+
+    {/* Sheets have been used here to make the interaction more interactive */}
     <div className="container mx-auto p-4 bg-blue-900 ">
       <div className="text-white  hover:text-gray-500  absolute right-[1%] top-4 h-10" >
                     <Sheet>
@@ -183,6 +189,8 @@ const DrHomepage = ({ patient, pData, Sugar,doc,Dr, Bp, prescriptions ,patientDe
                   ))}
                 </tbody>
               </table>
+
+              
             </div>
 
             {/* Render BP Data */}
@@ -215,6 +223,10 @@ const DrHomepage = ({ patient, pData, Sugar,doc,Dr, Bp, prescriptions ,patientDe
               </table>
             </div>
           </div>
+
+          
+  {/* Table Head */}
+  
 
           {/* Render Prescriptions */}
           <div className="bg-white p-4 rounded shadow-md mb-4">

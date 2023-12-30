@@ -1,3 +1,4 @@
+//importing the components
 import React from 'react';
 import Tilt from 'react-parallax-tilt';
 import { Head } from '@inertiajs/react';
@@ -8,7 +9,12 @@ import { useState } from 'react';
 import {useForm} from '@inertiajs/inertia-react'
 import Navbar from './Navbar';
 const editUserData = () => {
+
+
     const [click,setClicked] = useState(false);
+
+
+    // use form to submit the data
   const { data, setData, post, processing, errors, reset } = useForm({
     name:'',
     address:"",
@@ -24,6 +30,8 @@ const editUserData = () => {
     pid:'',
 });
 
+
+// method to toggle the sidebar
 const Click=()=>{
     console.log(click)
       setClicked(!click);
@@ -32,23 +40,31 @@ const Click=()=>{
 
 
 
-  const dataSubmit=(e)=>{
-    
+
+  // method to submit the data - data sent is update
+  const dataSubmit=(e)=>{    
     e.preventDefault();
     post(route('admin.updateData'));
   }
   return (
     <>
     <Head title="Admin" />
+    {/* Displaying the navbar */}
     <Navbar click={Click} />
+
     <div className="flex flex-col h-[20vh]" >
+
     <div id='sidebar' className="w-[100%] flex flex-row " >
+
+      {/* Displaying the sidebar based on click */}
         {click && <SideBar/>}
         <div>
         <Tilt tiltMaxAngleX={.5} tiltMaxAngleY={1.5} >    
 
         <form onSubmit={dataSubmit} className="p-5 m-5 bg-[brown] rounded-lg" >
 
+
+{/* Using label and input from shadcn */}
         <Label>Patient Id</Label>
           <Input value={data.pid} onChange={(e)=>{setData('pid',e.target.value)}} text='text' />
 
@@ -82,25 +98,13 @@ const Click=()=>{
 
           <Label>Father Name</Label>
           <Input  text='text' />
-
-     
-         
-
-
-
-
-
-
-
-
-  
-  <Label>Phone:</Label>
+          <Label>Phone:</Label>
                 <Input value={data.phone_no} onChange={(e) => { setData('phone_no', e.target.value) }} type='number' />
 
                 <Label>DOB:</Label>
                 <Input value={data.DOB} onChange={(e) => { setData('DOB', e.target.value) }} type='date' />
 
-                {/* ... other Input fields ... */}
+             
 
                 <Label>Sex:</Label>
                 <select name="sex" id="sex"  onChange={(e) => { setData('sex', e.target.value) }}>
@@ -140,7 +144,6 @@ const Click=()=>{
   
         <Label>Address</Label>
         <textarea value={data.address} onChange={(e)=>{setData('address',e.target.value)}}  row='2' col='2' span='2' ></textarea>
-
         <button type="submit" >Register</button>
         </form>
         </Tilt>

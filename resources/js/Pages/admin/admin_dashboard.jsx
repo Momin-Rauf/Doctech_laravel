@@ -17,15 +17,21 @@ export default function admin_dashboard() {
   const [click,setClicked] = useState(false);
   
   const Click=()=>{
-    console.log(click);
+    // This function is used to close and open the sideBar
       setClicked(!click);
   }
 
   return (
+
+
     <>
     <Head title="Admin" />
     <div className="flex flex-col  h-[100vh]" >
+
+      {/* the Navbar component */}
       <Navbar click={Click} />
+
+      {/* the UserData component  */}
       <UserData click={Click} />
       {/* <DoctorData click={click} /> */}
        

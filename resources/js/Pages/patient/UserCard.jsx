@@ -1,6 +1,7 @@
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
+// This component is used to display the user Data on the sheet
 const UserCard = ({ UserData, User }) => {
   return (
     <div className="flex items-center space-x-4 bg-blue-200 p-6 rounded-md shadow-md">

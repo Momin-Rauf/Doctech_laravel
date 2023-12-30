@@ -1,9 +1,8 @@
-
+// importing the components
 import React, { useState } from 'react';
 import Navbar from './Navbar';
-import { Head } from '@inertiajs/react';
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/components/ui/label"
 import SideBar from './SideBar';
 import {useForm} from '@inertiajs/inertia-react'
 const HistoryForm = ()=>{
@@ -13,7 +12,7 @@ const HistoryForm = ()=>{
       console.log(click)
         setClicked(!click);
     }
-
+    // use form to submit the data
     const { data, setData, post, processing, errors, reset } = useForm({
         issue:'',
         history:'',
@@ -27,10 +26,12 @@ const HistoryForm = ()=>{
     
     return (
        <>
+       {/* Navbar */}
         <Navbar click={Click} />
         <div className="flex flex-col h-[20vh]" >
      
       
+      {/* SideBar */}
     <div id='sidebar' className="w-[100%] flex flex-row " >
     {click && <SideBar/>}
 
@@ -38,13 +39,15 @@ const HistoryForm = ()=>{
         
         
         <form onSubmit={submit} >
-
+            {/* Form to submit the data */}
             <label htmlFor="">Patient Id</label>
             <Input value={data.pid} onChange={(e)=>{setData('pid',e.target.value)}} type="text" />
 
+{/* Medical Issues */}
             <label>Medical Issue</label>
             <textarea value={data.issue} onChange={(e)=>setData('issue',e.target.value)} ></textarea>
 
+            {/* Family history */}
             <label>Family History</label>
             <textarea value={data.history} onChange={(e)=>setData('history',e.target.value)} ></textarea>
             <button type='submit' >Add</button>

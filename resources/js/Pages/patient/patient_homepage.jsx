@@ -3,11 +3,10 @@ import { Link } from "@inertiajs/react";
 import Tilt from "react-parallax-tilt";
 import { FaEdit } from "react-icons/fa";
 import {Link as ScrollLink } from 'react-scroll';
-// import UserCard from "./UserCard";
+import UserCard from "./UserCard";
 import "./style.css";
 import Hand from "../images/hand .png";
 import brain from "../images/brain.png";
-import UpdatePasswordForm from "../Profile/Partials/UpdatePasswordForm";
 import UpdateProfileInformation from "../Profile/Partials/UpdateProfileInformationForm";
 import { Button } from "@/Components/ui/button";
 import UpdatePasswordForm from "../Profile/Partials/UpdatePasswordForm";
@@ -141,33 +140,33 @@ const PatientHomepage = ({
         <div className="bg-[#172545]  h-[100vh]">
             <div className="h-[100vh] text-white flex flex-row-reverse gap-10 p-4 ">
                 <div>
-                    <h1 className="top-[20%] left-[40%] absolute  pb-2 text-[86px] no-underline font-semibold tracking-tight  first:mt-0">
+                    <h1 className="md:top-[20%] md:left-[40%] md:absolute absolute top-[20%] left-[20%] text-[60px]  md:pb-2 md:text-[86px] md:no-underline md:font-semibold md:tracking-tight  md:first:mt-0">
                         DOCTECH
                     </h1>
                     <h2
                         style={{ color: `${colors}` }}
-                        className={`scroll-m-20 top-[40%] left-[40%] absolute border-b pb-2 text-3xl font-semibold tracking-tight  first:mt-0`}
+                        className={`md:scroll-m-20 md:top-[40%] hidden md:block md:left-[40%] md:absolute md:border-b md:pb-2 md:text-3xl md:font-semibold md:tracking-tight  md:first:mt-0`}
                     >
                         {para}
                     </h2>
                 </div>
                 <img
                     src={Hand}
-                    className="absolute left-10  animate-pulse"
+                    className="absolute left-10 animate-pulse"
                     alt=""
                 />
                 <img
                     id="brain"
                     src={brain}
-                    className="absolute left-16 h-[400px] bottom-48 "
+                    className="absolute left-16 hidden md:block h-[400px] bottom-48 "
                     alt=""
                 />
 
 <ScrollLink to="appointment" delay={500} smooth={true}>
-  <Button style={{ boxShadow: "0px 0px 2px white" }} className="absolute top-[70%]   text-white  hover:text-black hover:bg-white right-[47%]" >Book Appointment</Button>
+  <Button style={{ boxShadow: "0px 0px 2px white" }} className="md:absolute md:top-[70%] md:left-[40%] top-[40%] absolute  text-white  hover:text-black hover:bg-white right-[47%]" >Book Appointment</Button>
 </ScrollLink>
 
-                <div className="text-white hover:text-gray-500 h-10" >
+                <div className="text-white  hover:text-gray-500 h-10" >
                     <Sheet>
                         <SheetTrigger>
                             <CiUser
@@ -182,7 +181,7 @@ const PatientHomepage = ({
                             <SheetHeader>
                                 <SheetTitle>User</SheetTitle>
                                 <SheetDescription>
-                                    {/* <UserCard UserData={UserData} User={User} /> */}
+                                    <UserCard UserData={UserData} User={User} />
                                     <Link className="bg-blue-900 text-white relative top-10 p-4 rounded-2xl" href={route('Logout')}>Logout</Link>
                                 </SheetDescription>
                             </SheetHeader>
@@ -209,14 +208,14 @@ const PatientHomepage = ({
                             <SheetHeader>
                                 <SheetTitle>Appointments</SheetTitle>
                                 <SheetDescription>
-                                    {/* <Booking appointments={appointments} /> */}
+                                    <Booking appointments={appointments} />
                                 </SheetDescription>
                             </SheetHeader>
                         </SheetContent>
                     </Sheet>
                 </div>
 
-                <div className="flex absolute right-[35%] justify-center items-center flex-col" >
+                <div className="flex absolute  md:right-[35%] justify-center  items-center flex-col" >
                             <SlCalender 
                                 href={route('showAppointment')}
                                 style={{ boxShadow: "0px 0px 2px white" }}
