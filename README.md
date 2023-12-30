@@ -9,14 +9,14 @@
 
 
 <h2>How to setup</h2>
-1-Clone
-2-move to Directory
-3-npm install
-4-composer install
-5-change .env.example to .env file and replace database name with doctech
-6-php artisan key:generate
-7-php artisan serve
-8-npm run dev
+<p>1-Clone</p>
+<p>2-move to Directory</p>
+<p>3-npm install</p>
+<p>4-composer install</p>
+<p>5-change .env.example to .env file and replace database name with doctech</p>
+<P>6-php artisan key:generate</P>
+<P>7-php artisan serve</P>
+<p>8-npm run dev</p>
 
 ## About Laravel
 
