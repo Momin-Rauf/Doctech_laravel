@@ -39,9 +39,9 @@ class PatientController extends Controller
         // return response()->json($appointments);
         return Inertia::render('patient/patient_homepage',
         [
-            'user' => [$userID],
-            'userData'=> [$userDetails],
-            'appointments' =>$appointments,
+        'user' => [$userID],
+        'userData'=> [$userDetails],
+        'appointments' =>$appointments,
         'doctor'=>$doctor,
         'Sugar' =>$sugarData,
         'Bp' => $bpData,

@@ -11,6 +11,7 @@ use App\Models\Doctor;
 use App\Models\Prescription;
 use App\Models\TestReport;
 use App\Models\Bp;
+use App\Models\Appointment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use DB;
@@ -18,7 +19,13 @@ use DB;
 class DoctorController extends Controller
 {
     public function dr(){
-        return Inertia::render('doctor/dr_homepage');
+        $Dr = User::where('id',auth()->user()->id)->first();
+        $doctor_id = Doctor::where('user_id',auth()->user()->id)->first();
+        $appointments = Appointment::where('doctor_id',$doctor_id->id)->get();
+        $patient = Patient::all();
+        $user = User::where('role','patient')->get();
+        // return response()->json($patient);
+        return Inertia::render('doctor/dr_homepage',['Dr'=>$Dr,'appointment'=>$appointments,'user'=>$user,'patientDetails'=>$patient,'doc'=>$doctor_id]);
     }
 
     

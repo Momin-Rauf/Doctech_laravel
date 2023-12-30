@@ -3,10 +3,12 @@ import { Link } from "@inertiajs/react";
 import Tilt from "react-parallax-tilt";
 import { FaEdit } from "react-icons/fa";
 import {Link as ScrollLink } from 'react-scroll';
-import UserCard from "./UserCard";
+// import UserCard from "./UserCard";
 import "./style.css";
 import Hand from "../images/hand .png";
 import brain from "../images/brain.png";
+import UpdatePasswordForm from "../Profile/Partials/UpdatePasswordForm";
+import UpdateProfileInformation from "../Profile/Partials/UpdateProfileInformationForm";
 import { Button } from "@/Components/ui/button";
 import UpdatePasswordForm from "../Profile/Partials/UpdatePasswordForm";
 import {
@@ -165,7 +167,7 @@ const PatientHomepage = ({
   <Button style={{ boxShadow: "0px 0px 2px white" }} className="absolute top-[70%]   text-white  hover:text-black hover:bg-white right-[47%]" >Book Appointment</Button>
 </ScrollLink>
 
-                <div className="text-white     hover:text-gray-500 h-10" >
+                <div className="text-white hover:text-gray-500 h-10" >
                     <Sheet>
                         <SheetTrigger>
                             <CiUser
@@ -180,7 +182,7 @@ const PatientHomepage = ({
                             <SheetHeader>
                                 <SheetTitle>User</SheetTitle>
                                 <SheetDescription>
-                                    <UserCard UserData={UserData} User={User} />
+                                    {/* <UserCard UserData={UserData} User={User} /> */}
                                     <Link className="bg-blue-900 text-white relative top-10 p-4 rounded-2xl" href={route('Logout')}>Logout</Link>
                                 </SheetDescription>
                             </SheetHeader>
@@ -207,7 +209,7 @@ const PatientHomepage = ({
                             <SheetHeader>
                                 <SheetTitle>Appointments</SheetTitle>
                                 <SheetDescription>
-                                    <Booking appointments={appointments} />
+                                    {/* <Booking appointments={appointments} /> */}
                                 </SheetDescription>
                             </SheetHeader>
                         </SheetContent>

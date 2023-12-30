@@ -1,11 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { useForm } from '@inertiajs/react';
+import { FaEdit } from "react-icons/fa";
+import { CiUser } from "react-icons/ci";
+import { Link } from '@inertiajs/inertia-react';
+// import Booking from '../patient/Booking';
+import Card from './Card';
+import AppointmentCard from './AppointmentCard';
+import DoctorCard from '../patient/DoctorCard';
 
-const DrHomepage = ({ patient, pData, Sugar, Bp, prescriptions }) => {
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { SlCalender } from "react-icons/sl";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import UpdatePasswordForm from '../Profile/Partials/UpdatePasswordForm';
+import UpdateProfileInformationForm from '../Profile/Partials/UpdateProfileInformationForm';
+import { useEffect } from 'react';
+import { set } from 'react-hook-form';
+const DrHomepage = ({ patient, pData, Sugar,doc,Dr, Bp, prescriptions ,patientDetails, appointment,user }) => {
+  
   const [view, setView] = useState(false);
   const { data, setData, post } = useForm({
     pid: '',
   });
+
+  
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -13,8 +37,94 @@ const DrHomepage = ({ patient, pData, Sugar, Bp, prescriptions }) => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <form onSubmit={submitHandler} className="mb-4 flex items-center justify-center">
+    <>
+    <div className="container mx-auto p-4 bg-blue-900 ">
+      <div className="text-white  hover:text-gray-500  absolute right-[1%] top-4 h-10" >
+                    <Sheet>
+                        <SheetTrigger>
+                            <CiUser
+                                style={{ boxShadow: "0px 0px 2px white" }}
+                                className=" shadow-white rounded-[20px] w-10 h-10 p-2 hover:scale-105  "
+                                size={40}
+                            />
+                            <b className="hover:underline transition-all underline-offset-4" />
+                            
+                        </SheetTrigger>
+                        <SheetContent>
+                            <SheetHeader>
+                                <SheetTitle>Dr:{Dr.name}</SheetTitle>
+                                <SheetDescription>
+                                  <Card Dr={Dr} doctor={doc} /> 
+                                 
+                                    <Link className="bg-blue-900 text-white relative top-10 p-4 rounded-2xl" href={route('Logout')}>Logout</Link>
+                                </SheetDescription>
+                            </SheetHeader>
+                        </SheetContent>
+                    </Sheet>
+                </div>
+
+                
+
+                <div className="flex absolute left-[10%] text-white top-4 justify-center items-center flex-col " >
+                            <SlCalender 
+                                href={route('showAppointment')}
+                                style={{ boxShadow: "0px 0px 2px white" }}
+                                className=" shadow-white  rounded-[20px]  w-14 h-10 p-2 hover:scale-105  "
+                                size={40}
+                            >
+
+                            </SlCalender>
+                            <Link href={route('chatify')} className="hover:underline transition-all underline-offset-4" >Chats</Link>
+                            </div>
+
+
+                <div className="hover:underline text-white hover:text-gray-500 h-10">
+                    <Sheet>
+                        <SheetTrigger>
+                            <FaEdit
+                                style={{ boxShadow: "0px 0px 2px white" }}
+                                className=" shadow-white rounded-[20px] w-14 h-10 p-2 hover:scale-105  "
+                                size={35}
+                            />
+                            <b className="hover:underline transition-all underline-offset-4" >Edit</b>
+                            
+                        </SheetTrigger>
+                        <SheetContent>
+                            <SheetHeader>
+                                <SheetTitle>Update User Form</SheetTitle>
+                                <SheetDescription>
+                                    <Tabs
+                                        defaultValue="account"
+                                        className="w-[400px]"
+                                    >
+                                        <TabsList>
+                                            <TabsTrigger value="account">
+                                                Account
+                                            </TabsTrigger>
+                                            <TabsTrigger value="password">
+                                                Password
+                                            </TabsTrigger>
+                                        </TabsList>
+                                        <TabsContent value="account">
+                                            <UpdateProfileInformationForm />
+                                        </TabsContent>
+                                        <TabsContent value="password">
+                                            <UpdatePasswordForm />
+                                        </TabsContent>
+                                    </Tabs>
+                                </SheetDescription>
+                            </SheetHeader>
+                        </SheetContent>
+                    </Sheet>
+                </div>
+             
+
+
+      
+      <form onSubmit={submitHandler} className="mb-4 flex mt-24 items-center justify-center">
+      <h2 className="scroll-m-20 top-24 pb-2 text-3xl font-semibold absolute text-white tracking-tight first:mt-0">
+                    Enter Patient Id
+    </h2>
         <input
           onChange={(e) => setData('pid', e.target.value)}
           type="number"
@@ -30,12 +140,12 @@ const DrHomepage = ({ patient, pData, Sugar, Bp, prescriptions }) => {
         </button>
       </form>
 
-      <button
+      {patient && <button
         onClick={() => { setView(!view) }}
         className="bg-green-500 text-white px-6 py-2 rounded mb-4 focus:outline-none"
       >
         {view ? 'Hide Details' : 'Show Details'}
-      </button>
+      </button> }
 
       {view &&
         <>
@@ -137,7 +247,11 @@ const DrHomepage = ({ patient, pData, Sugar, Bp, prescriptions }) => {
           </div>
         </>
       }
+
+
     </div>
+      <AppointmentCard user={user} patient={patientDetails} appointment={appointment} />
+      </>
   );
 };
 

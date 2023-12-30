@@ -6,7 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { useState } from 'react';
 import { Toaster } from "@/components/ui/sonner"
 const DoctorCard = ({Data,doctor}) => {
-    
+    console.log(Data,'dasda');
     const { data, setData, post, processing, errors, reset } = useForm({
         id:'',
         date:'',

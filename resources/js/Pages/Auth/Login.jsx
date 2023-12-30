@@ -32,7 +32,7 @@ export default function Login({ status, canResetPassword }) {
             <Head title="Log in" />
 
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
-
+            <Link className='absolute z-10 left-2 top-2 bg-gray-300 px-4 py-2 rounded-full hover:bg-gray-900 hover:text-white w-24 text-center' href={route('welcome')} >Back</Link>
            <div className='bg-[#e5ecf1] items-center flex justify-center   h-[100vh]  flex-row ' >
            <div className='flex justify-center w-[70%] p-5 items-center bg-white flex-row shadow-black shadow-md rounded-md' >
                 
