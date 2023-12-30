@@ -17,16 +17,16 @@ export default function admin_dashboard() {
   const [click,setClicked] = useState(false);
   
   const Click=()=>{
-    console.log(click)
+    console.log(click);
       setClicked(!click);
   }
 
   return (
     <>
     <Head title="Admin" />
-    <div className="flex flex-col bg-[#505050] h-[100vh]" >
+    <div className="flex flex-col  h-[100vh]" >
       <Navbar click={Click} />
-      <UserData click={click} />
+      <UserData click={Click} />
       {/* <DoctorData click={click} /> */}
        
     </div>

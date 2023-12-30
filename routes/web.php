@@ -150,6 +150,9 @@ Route::middleware(['auth','role:patient'])->group(function(){
     Route::post('/sugar', [PatientController::class, 'saveSugar'])->name('sugar');
     Route::post('/bp', [PatientController::class, 'saveBp'])->name('Bp');
     Route::post('/appoint', [PatientController::class, 'getId'])->name('appoint');
+    Route::get('/appointments', [PatientController::class, 'showAppointment'])->name('showAppointment');
+    Route::get('/admin/logout',[PatientController::class,'logout'])->name('Logout');
+    
     
 
 

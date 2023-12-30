@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import Navbar from './Navbar';
 import { Head } from '@inertiajs/react';
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import SideBar from './SideBar';
 import {useForm} from '@inertiajs/inertia-react'
 const HistoryForm = ()=>{
@@ -38,7 +40,7 @@ const HistoryForm = ()=>{
         <form onSubmit={submit} >
 
             <label htmlFor="">Patient Id</label>
-            <input value={data.pid} onChange={(e)=>{setData('pid',e.target.value)}} type="text" />
+            <Input value={data.pid} onChange={(e)=>{setData('pid',e.target.value)}} type="text" />
 
             <label>Medical Issue</label>
             <textarea value={data.issue} onChange={(e)=>setData('issue',e.target.value)} ></textarea>

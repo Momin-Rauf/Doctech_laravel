@@ -29,9 +29,11 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet";
 
+import Booking from "./Booking";
 import UpdateProfileInformationForm from "../Profile/Partials/UpdateProfileInformationForm";
 import { CiUser } from "react-icons/ci";
 import {
+
     Menubar,
     MenubarContent,
     MenubarItem,
@@ -67,10 +69,11 @@ const PatientHomepage = ({
     prescriptions,
     mustVerifyEmail,
     status,
+    appointments,
     doctorData,
     doctor,
 }) => {
-
+  console.log(appointments);
     const [User, setUser] = useState([]);
     const [BpReadings, setBpReadings] = useState([]);
     const [SugarLevels, setSugarLevels] = useState([]);
@@ -178,6 +181,7 @@ const PatientHomepage = ({
                                 <SheetTitle>User</SheetTitle>
                                 <SheetDescription>
                                     <UserCard UserData={UserData} User={User} />
+                                    <Link className="bg-blue-900 text-white relative top-10 p-4 rounded-2xl" href={route('Logout')}>Logout</Link>
                                 </SheetDescription>
                             </SheetHeader>
                         </SheetContent>
@@ -189,10 +193,13 @@ const PatientHomepage = ({
                         <SheetTrigger>
                             <div className="flex justify-center items-center flex-col" >
                             <SlCalender 
+                                href={route('showAppointment')}
                                 style={{ boxShadow: "0px 0px 2px white" }}
                                 className=" shadow-white  rounded-[20px]  w-14 h-10 p-2 hover:scale-105  "
                                 size={40}
-                            />
+                            >
+
+                            </SlCalender>
                             <b className="hover:underline transition-all underline-offset-4" >Appointments</b>
                             </div>
                         </SheetTrigger>
@@ -200,7 +207,7 @@ const PatientHomepage = ({
                             <SheetHeader>
                                 <SheetTitle>Appointments</SheetTitle>
                                 <SheetDescription>
-                                    Here you will see you appointments
+                                    <Booking appointments={appointments} />
                                 </SheetDescription>
                             </SheetHeader>
                         </SheetContent>
@@ -260,7 +267,7 @@ const PatientHomepage = ({
                             <TableHead className="w-[100px]">Date</TableHead>
                             <TableHead>Time</TableHead>
                             <TableHead>Systolic</TableHead>
-                            <TableHead className="text-right">
+                            <TableHead className="text-left">
                                 Diastolic
                             </TableHead>
                         </TableRow>
@@ -286,7 +293,7 @@ const PatientHomepage = ({
                 </Table>
 
                 <Drawer>
-                    <DrawerTrigger>Open</DrawerTrigger>
+                    <DrawerTrigger><Button>Add Blood Pressure</Button></DrawerTrigger>
                     <DrawerContent>
                         <DrawerHeader>
                             <DrawerTitle>
@@ -374,22 +381,22 @@ const PatientHomepage = ({
                 </Table>
 
                 <Drawer>
-                    <DrawerTrigger>Open</DrawerTrigger>
-                    <DrawerContent>
-                        <DrawerHeader>
+                    <DrawerTrigger><Button>Add Sugar</Button></DrawerTrigger>
+                    <DrawerContent className='bg-blue-600' >
+                        <DrawerHeader className={'bg-blue-600'} >
                             <DrawerTitle>Please Add Sugar Data:</DrawerTitle>
                             <DrawerDescription></DrawerDescription>
                         </DrawerHeader>
-                        <form onSubmit={submitHandlerSugar}>
-                            <DrawerFooter>
-                                <Label htmlFor="diastolic">Systolic</Label>
+                        <form className="rounded-full p-4" onSubmit={submitHandlerSugar}>
+                            <DrawerFooter className='rounded-3xl flex flex-col bg-blue-400' >
+                                <Label htmlFor="diastolic">Sugar level</Label>
                                 <Input
                                     value={data.SugarValue}
                                     onChange={(e) => {
                                         setData("SugarValue", e.target.value);
                                     }}
                                     type="text"
-                                    placeholder="Systolic"
+                                    placeholder="value"
                                 />
 
                                 <input
@@ -409,7 +416,7 @@ const PatientHomepage = ({
 
                                 <button
                                     type="submit"
-                                    className="w-24 p-4 bg-blue"
+                                    className="w-24 px-4 py-2  bg-blue-900 rounded-full text-white "
                                 >
                                     Submit{" "}
                                 </button>

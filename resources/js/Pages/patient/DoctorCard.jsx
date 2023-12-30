@@ -1,15 +1,30 @@
 import React from 'react'
 import { Button } from '@/Components/ui/button';
+import { useForm } from '@inertiajs/react';
 import { useEffect } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { useState } from 'react';
+import { Toaster } from "@/components/ui/sonner"
 const DoctorCard = ({Data,doctor}) => {
-    console.log(Data);
+    
+    const { data, setData, post, processing, errors, reset } = useForm({
+        id:'',
+        date:'',
+    });
     const [name,setName] = useState('');
     const [image,setImg] = useState('');
+
+    const submitHandler = (e)=>{
+        e.preventDefault();
+        setData('id',Data.id);
+        console.log(Data.id)
+        post(route('appoint'));
+    }
+
     useEffect(()=>{
         const filterData=()=>{ 
-            doctor.map((D)=>{
+            doctor.map((D,index)=>{
+                const key=index;
                 if (Data.user_id === D.id){
                     setName(D.name);
                     setImg(D.avatar);
@@ -53,10 +68,11 @@ const DoctorCard = ({Data,doctor}) => {
 
 
 
-        <form className=' mt-32' action="">
-        <input type="date" className='bg-[#172545] p-1 rounded-3xl h-8 outline-none rounded-r-none px-4' />
-        <Button className="rounded-3xl rounded-l-none p-1 px-4 h-8" >Book</Button>
-        </form>
+    <form className=' mt-32' onSubmit={submitHandler}>
+  <input type="date" value={data.date} onChange={(e) => setData('date', e.target.value)} className='bg-[#172545] p-1 rounded-3xl h-8 outline-none rounded-r-none px-4' />
+  <button type="submit" className="rounded-3xl rounded-l-none p-1 px-4 h-8">Book</button>
+  <Toaster data={'Appointment has been scheduled'} />
+</form>
     </div>
         
     </div>

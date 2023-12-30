@@ -2,7 +2,8 @@ import React from 'react';
 import Tilt from 'react-parallax-tilt';
 import { Link } from '@inertiajs/inertia-react';  // Update the import statement
 import { useForm } from '@inertiajs/inertia-react'; // Update the import statement
-
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 const Navbar = ({ click }) => {
   const { post } = useForm();
 
@@ -11,11 +12,12 @@ const Navbar = ({ click }) => {
   };
 
   return (
-    <nav className="h-[80px] bg-[#404040] gap-12 flex flex-row items-center justify-center">
+    <nav className="h-[80px] bg-blue-500 gap-12 flex flex-row p-7">
+      
+        
       <button onClick={() => click()}>Side</button>
       <div className="flex flex-row">
-        <Tilt glareColor={'white'}>
-          {/* Use the Link component from @inertiajs/inertia-react */}
+        <Tilt glareColor={'lightblue'}>
           <Link
             href={route('admin.dashboard')}
             className="m-12 hover:text-white shadow-md rounded-lg p-4 shadow-black"
@@ -23,8 +25,7 @@ const Navbar = ({ click }) => {
             Patient
           </Link>
         </Tilt>
-        <Tilt>
-          {/* Use the Link component from @inertiajs/inertia-react */}
+        <Tilt glareColor={'lightblue'}>
           <Link
             href={route('doctorAdmin')}
             className="m-12 hover:text-white shadow-md rounded-lg p-4 shadow-black"
@@ -32,11 +33,11 @@ const Navbar = ({ click }) => {
             Doctor
           </Link>
         </Tilt>
-
-        <button onClick={logout}>Logout</button>
       </div>
+      <button className='absolute right-2' onClick={logout}>Logout</button>
     </nav>
   );
 };
 
 export default Navbar;
+            
