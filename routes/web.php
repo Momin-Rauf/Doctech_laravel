@@ -135,8 +135,8 @@ Route::middleware(['auth','role:admin'])->group(function(){
     Route::get('/admin/patents',[AdminController::class,'ShowAllPatients'])->name('admin.ShowAllPatients');
     Route::get('/admin/view',[AdminController::class,'ShowAllDoctors'])->name('admin.ShowAllDoctors');
     Route::get('/admin/view',[AdminController::class,'AllDoctorsViewPage'])->name('admin.AllDoctorsViewPage');
-    Route::get('/admin/doctors',[AdminController::class,'AllpatientsViewPage'])->name('admin.AllpatientsViewPage');
-
+    Route::get('/admin/patients-data',[AdminController::class,'AllpatientsViewPage'])->name('admin.AllpatientsViewPage');
+    
 
 
 

@@ -1,16 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Tilt from 'react-parallax-tilt';
 import { Head } from '@inertiajs/react';
 import SideBarDr from './SideBarDr';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useForm } from '@inertiajs/inertia-react'
+import { useForm } from '@inertiajs/inertia-react';
 import Navbar from './Navbar';
-import { useState } from 'react';
-const DoctorData = () => {
-  const [click, setClicked] = useState(false);
 
-  // Use form is hook provided by
+const EditDoctorData = () => {
+
   const { data, setData, post, processing, errors, reset } = useForm({
     name: '',
     address: "",
@@ -26,95 +24,132 @@ const DoctorData = () => {
     charges_follow_up: '',
   });
 
-  //All the above values will be posted by post method 
+  
 
-
-
-  //click method
-  const Click = () => {
-    console.log(click)
-    setClicked(!click);
-  }
-
-
-  const dataSubmit = (e) => {
-    //method to submit data to update the doctor data
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(data);
     post(route('admin.updateDoctor'));
-  }
+  };
+
   return (
     <>
       <Head title="Admin" />
-      {/* title name */}
-
-
-      {/*Displaying the navbar  */}
-      <Navbar click={Click} />
-
       
-      <div className="flex flex-col h-[20vh]" >
-        <div id='sidebar' className="w-[100%] flex flex-row " >
-          {click && <SideBarDr />}
-          <div>
-            <Tilt tiltMaxAngleX={.5} tiltMaxAngleY={1.5} >
+      <div className="flex flex-col w-[1280px] bg-slate-200">
+        <h1 className='text-slate-900 font-bold ml-12 text-2xl' >Edit data</h1>
+        <div id='sidebar' className="flex flex-row">
+          
+          <div className="flex-grow p-5">
+            <Tilt tiltMaxAngleX={0.2} tiltMaxAngleY={1.5}>
+              <form
+                onSubmit={handleSubmit}
+                className="p-5 m-5 bg-white rounded-lg shadow-lg"
+              >
+                <div className="grid grid-cols-3 gap-4 border-2 p-4 rounded-3xl bg-slate-100">
+                  <div>
+                    <Label>Dr Id</Label>
+                    <Input
+                      value={data.Did}
+                      onChange={(e) => setData('Did', e.target.value)}
+                      type='text'
+                    />
+                  </div>
 
+                  <div>
+                    <Label>First Name</Label>
+                    <Input
+                      value={data.name}
+                      onChange={(e) => setData('name', e.target.value)}
+                      type='text'
+                    />
+                  </div>
 
-              {/* form to edit the data of the doctor */}
-              <form onSubmit={dataSubmit} className="p-5 m-5 bg-[brown] rounded-lg" >
+                  <div>
+                    <Label>Email</Label>
+                    <Input
+                      value={data.email}
+                      onChange={(e) => setData('email', e.target.value)}
+                      type='email'
+                    />
+                  </div>
 
+                  <div>
+                    <Label>Password</Label>
+                    <Input
+                      value={data.password}
+                      onChange={(e) => setData('password', e.target.value)}
+                      type='password'
+                    />
+                  </div>
 
-                {/* All the labels and the inputs are imported from the SHADCN components */}
-                <Label>Dr Id</Label>
-                <Input value={data.Did} onChange={(e) => { setData('Did', e.target.value) }} text='text' />
+                  <div>
+                    <Label>Specialization</Label>
+                    <Input
+                      value={data.specialization}
+                      onChange={(e) => setData('specialization', e.target.value)}
+                      type='text'
+                    />
+                  </div>
 
+                  <div>
+                    <Label>Experience</Label>
+                    <Input
+                      value={data.experience}
+                      onChange={(e) => setData('experience', e.target.value)}
+                      type='number'
+                    />
+                  </div>
 
+                  <div>
+                    <Label>Current Working Place</Label>
+                    <Input
+                      value={data.current_working_place}
+                      onChange={(e) => setData('current_working_place', e.target.value)}
+                      type='text'
+                    />
+                  </div>
 
-                <Label>First Name</Label>
-                <Input value={data.name} onChange={(e) => { setData('name', e.target.value) }} text='text' />
+                  <div>
+                    <Label>Availability</Label>
+                    <Input
+                      value={data.availability}
+                      onChange={(e) => setData('availability', e.target.value)}
+                      type='text'
+                    />
+                  </div>
 
+                  <div>
+                    <Label>Charges</Label>
+                    <Input
+                      value={data.charges_first_appointment}
+                      onChange={(e) => setData('charges_first_appointment', e.target.value)}
+                      type='number'
+                    />
+                  </div>
 
+                  <div>
+                    <Label>Follow Up Charges</Label>
+                    <Input
+                      value={data.charges_follow_up}
+                      onChange={(e) => setData('charges_follow_up', e.target.value)}
+                      type='number'
+                    />
+                  </div>
+                </div>
 
-                <Label>Email:</Label>
-                <Input value={data.email} onChange={(e) => { setData('email', e.target.value) }} text='email' />
-
-                <Label>Password</Label>
-                <Input value={data.password} onChange={(e) => { setData('password', e.target.value) }} text='password' />
-
-                <Label>Specialization:</Label>
-                <Input text='text' value={data.specialization} onChange={(e) => { setData('specialization', e.target.value) }} row='2' col='2' span='2' />
-
-                <Label>Experience:</Label>
-                <Input text='number' value={data.experience} onChange={(e) => { setData('experience', e.target.value) }} row='2' col='2' span='2' />
-
-                <Label>current_working_place:</Label>
-                <Input text='text' value={data.current_working_place} onChange={(e) => { setData('current_working_place', e.target.value) }} row='2' col='2' span='2' />
-
-                <Label>Availability:</Label>
-                <Input text='text' value={data.availability} onChange={(e) => { setData('availability', e.target.value) }} row='2' col='2' span='2' />
-
-                <Label>Charges:</Label>
-                <Input text='number' value={data.charges_first_appointment} onChange={(e) => { setData('charges_first_appointment', e.target.value) }} row='2' col='2' span='2' />
-
-                <Label>Follow Up Charges:</Label>
-                <Input text='number' value={data.charges_follow_up} onChange={(e) => { setData('charges_follow_up', e.target.value) }} row='2' col='2' span='2' />
-
-
-
-                <button type="submit" >Register</button>
-
-
-
-
-
+                <button
+                  type="submit"
+                  className="mt-4 px-4 py-2 bg-slate-800 text-white rounded-lg"
+                >
+                  Register
+                </button>
               </form>
             </Tilt>
           </div>
         </div>
-
       </div>
     </>
-  )
-}
+  );
+};
 
-export default DoctorData;
+export default EditDoctorData;

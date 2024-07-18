@@ -55,6 +55,10 @@ class PatientController extends Controller
    
 
     public function getId(Request $request){
+        $request->validate([
+            'id' => 'required|integer|exists:doctors,id',
+            'date' => 'required|date'
+        ]);
         $patient = Patient::where('user_id',auth()->user()->id)->first();
         Appointment::updateOrCreate(
             [
@@ -67,6 +71,11 @@ class PatientController extends Controller
     }
 
     public function saveSugar(Request $request){
+        $request->validate([
+            'SugarValue' => 'required|numeric',
+            'Time' => 'required|date_format:H:i',
+            'SugarDate' => 'required|date'
+        ]);
         $patient = Patient::where('user_id',auth()->user()->id)->first();
         
         Sugar::create([
@@ -79,6 +88,12 @@ class PatientController extends Controller
 }
 
     public function saveBp(Request $request){
+        $request->validate([
+            'Systolic' => 'required|numeric',
+            'Diastolic' => 'required|numeric',
+            'Time' => 'required|date_format:H:i',
+            'BpDate' => 'required|date'
+        ]);
         $patient = Patient::where('user_id',auth()->user()->id)->first();
         
         Bp::create([

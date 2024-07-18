@@ -1,20 +1,18 @@
-// importing all the components
-import React from "react";
+import React, { useState } from "react";
 import Tilt from "react-parallax-tilt";
 import { Head } from "@inertiajs/react";
 import SideBarDr from "./SideBarDr";
 import { useForm } from "@inertiajs/inertia-react";
-import Navbar from "./Navbar";
+// import Navbar from "./Navbar";
+import EditDoctorData from "./editDoctorData";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
 
 const DoctorData = () => {
     const [click, setClicked] = useState(false);
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
         address: "",
-
         email: "",
         password: "",
         role: "doctor",
@@ -26,166 +24,107 @@ const DoctorData = () => {
         charges_follow_up: "",
     });
 
-    const Click = () => {
-        console.log(click);
+    const handleClick = () => {
         setClicked(!click);
     };
 
-    const dataSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(data);
         post(route("admin.createDoc"));
     };
+
     return (
         <>
             <Head title="Admin" />
-
-            {/* Diplaying the navbar component */}
-            <Navbar click={Click} />
-
-
-            <div className="flex flex-col h-[20vh]">
-                <div id="sidebar" className="w-[100%] flex flex-row ">
-
-                  {/* Condition to check if button is on-- if on sidebar opens */}
+            <div className="flex flex-col w-[1220px] bg-slate-200">
+                
+                <div className="flex flex-row">
                     {click && <SideBarDr />}
-                    <div>
+                    <div className="flex-grow p-5">
                         <Tilt tiltMaxAngleX={0.5} tiltMaxAngleY={1.5}>
-
-                          {/* Form to submit the data and Register the Doctor */}
                             <form
-                                onSubmit={dataSubmit}
-                                className="p-5 m-5 justify-center items-center flex-row rounded-lg"
+                                onSubmit={handleSubmit}
+                                className="p-5 m-5 bg-white rounded-lg shadow-lg"
                             >
-                                <div className="border-[2px] p-2 rounded-3xl">
-                                    <label>First Name</label>
+                                <div className="border-2 p-4 rounded-3xl bg-slate-100">
+                                    <Label>First Name</Label>
                                     <Input
                                         value={data.name}
-                                        onChange={(e) => {
-                                            setData("name", e.target.value);
-                                        }}
-                                        text="text"
+                                        onChange={(e) => setData("name", e.target.value)}
+                                        type="text"
                                     />
 
-                                    <label>Email:</label>
+                                    <Label>Email</Label>
                                     <Input
                                         value={data.email}
-                                        onChange={(e) => {
-                                            setData("email", e.target.value);
-                                        }}
-                                        text="email"
+                                        onChange={(e) => setData("email", e.target.value)}
+                                        type="email"
                                     />
 
-                                    <label>Password</label>
+                                    <Label>Password</Label>
                                     <Input
                                         value={data.password}
-                                        onChange={(e) => {
-                                            setData("password", e.target.value);
-                                        }}
-                                        text="password"
+                                        onChange={(e) => setData("password", e.target.value)}
+                                        type="password"
                                     />
 
-                                    <label>Specialization:</label>
+                                    <Label>Specialization</Label>
                                     <Input
-                                        text="text"
                                         value={data.specialization}
-                                        onChange={(e) => {
-                                            setData(
-                                                "specialization",
-                                                e.target.value
-                                            );
-                                        }}
-                                        row="2"
-                                        col="2"
-                                        span="2"
+                                        onChange={(e) => setData("specialization", e.target.value)}
+                                        type="text"
                                     />
 
-                                    <label>Experience:</label>
+                                    <Label>Experience</Label>
                                     <Input
-                                        text="number"
                                         value={data.experience}
-                                        onChange={(e) => {
-                                            setData(
-                                                "experience",
-                                                e.target.value
-                                            );
-                                        }}
-                                        row="2"
-                                        col="2"
-                                        span="2"
+                                        onChange={(e) => setData("experience", e.target.value)}
+                                        type="number"
                                     />
 
-                                    <label>current_working_place:</label>
+                                    <Label>Current Working Place</Label>
                                     <Input
-                                        text="text"
                                         value={data.current_working_place}
-                                        onChange={(e) => {
-                                            setData(
-                                                "current_working_place",
-                                                e.target.value
-                                            );
-                                        }}
-                                        row="2"
-                                        col="2"
-                                        span="2"
+                                        onChange={(e) => setData("current_working_place", e.target.value)}
+                                        type="text"
                                     />
                                 </div>
-                                      
 
-                                      {/* Form 2 to submit more information */}
-                                <div className="absolute left-[100%] border-[2px] p-4 rounded-3xl top-[37%]">
-                                    <label>Availability:</label>
+                                <div className="mt-4 border-2 p-4 rounded-3xl bg-slate-100">
+                                    <Label>Availability</Label>
                                     <Input
-                                        text="text"
                                         value={data.availability}
-                                        onChange={(e) => {
-                                            setData(
-                                                "availability",
-                                                e.target.value
-                                            );
-                                        }}
-                                        row="2"
-                                        col="2"
-                                        span="2"
+                                        onChange={(e) => setData("availability", e.target.value)}
+                                        type="text"
                                     />
 
-                                    <label>Charges:</label>
+                                    <Label>Charges (First Appointment)</Label>
                                     <Input
-                                        text="number"
                                         value={data.charges_first_appointment}
-                                        onChange={(e) => {
-                                            setData(
-                                                "charges_first_appointment",
-                                                e.target.value
-                                            );
-                                        }}
-                                        row="2"
-                                        col="2"
-                                        span="2"
+                                        onChange={(e) => setData("charges_first_appointment", e.target.value)}
+                                        type="number"
                                     />
 
-                                    <label>Follow Up Charges:</label>
+                                    <Label>Follow Up Charges</Label>
                                     <Input
-                                        text="number"
                                         value={data.charges_follow_up}
-                                        onChange={(e) => {
-                                            setData(
-                                                "charges_follow_up",
-                                                e.target.value
-                                            );
-                                        }}
-                                        row="2"
-                                        col="2"
-                                        span="2"
+                                        onChange={(e) => setData("charges_follow_up", e.target.value)}
+                                        type="number"
                                     />
                                 </div>
 
-                                <button type="submit">Register</button>
+                                <button
+                                    type="submit"
+                                    className="mt-4 px-4 py-2 bg-slate-800 text-white rounded-lg"
+                                >
+                                    Register
+                                </button>
                             </form>
                         </Tilt>
                     </div>
                 </div>
             </div>
+            <EditDoctorData/>
         </>
     );
 };

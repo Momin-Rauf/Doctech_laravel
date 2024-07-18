@@ -34,6 +34,10 @@ class DoctorController extends Controller
 
     public function searchPatient(Request $request)
 {
+       // Validate the incoming request
+       $request->validate([
+        'pid' => 'required|integer|exists:doctor_patient,patient_id'
+    ]);
     $doctor_id = Doctor::where('user_id', auth()->user()->id)->first();
     // Use Eloquent to find patients in the patient_doctor table
     $patient = DB::table('doctor_patient')
@@ -70,7 +74,9 @@ class DoctorController extends Controller
     
 
     public function patientPage(Request $request){
-        
+        $request->validate([
+            'pid' => 'required|integer|exists:doctor_patient,patient_id'
+        ]);
         $doctor_id = Doctor::where('user_id', auth()->user()->id)->first();
         // Use Eloquent to find patients in the patient_doctor table
         $patient = DB::table('doctor_patient')
