@@ -18,60 +18,51 @@
 <P>7-php artisan serve</P>
 <p>8-npm run dev</p>
 
-## About Laravel
+## DOCTECH
+BRIDGING THE GAP BETWEEN DOCTOR AND PATIENT  
+Our team envisions creating A cutting-edge application that seamlessly empowers patients with convenient access to their medical records. Simultaneously, we aim to provide a robust system enabling doctors to effortlessly retrieve and manage the medical histories of their patients, fostering global accessibility through our web-based platform.
+In addition to facilitating record retrieval, our application strives to streamline the appointment scheduling process, enhancing convenience for patients who can proactively book appointments. Moreover, we prioritize a hassle-free communication channel between doctors and patients, eliminating the need for cumbersome profile setups. This ensures a smooth and efficient dialogue, allowing physicians to deliver superior advice and care to their patients, irrespective of geographical boundaries.
+By combining accessibility, efficiency, and seamless communication, our application aims to revolutionize the healthcare experience, making it more patient-centric and globally accessible.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+##User Research
+Understanding of requirements
+We wanted to know what the health landscape lacked so we took to the web and also used our own experiences to understand the possible requirements that we need to meet and to also understand how the health landscape in general was adapting new technologies, to better prepare ourselves for the project at hand and to understand how we would need to change our application to adapt better for the future.
+Our own experience:
+I remember that once I had gone to Chughtai lab for a covid-19 test when it was still wreaking havoc on the world, the test’s results were to be posted onto their application. The overall experience was very bad as the application was very clunky and had a bit of a learning curve to really be able to use it proficiently. Which when needed in crucial times can be paramount to have.
+Statements from the web:
+“Based on our analysis, users liked apps that are usable, offer a variety of features and options, are personalized, affordable, informative, credible, and secure. They also like apps that offer some form of social support, customer service, and emergency support. Users also preferred apps that allow them to have some control over the app features and functionalities (Figure 6). Below, we provide more detail of each of the characteristics that are valued by the users.”
+- Insights from user reviews to improve mental health apps
+“The search identified various problems and barriers in the context of mHealth apps. Although problems at the app level (such as usability) are studied frequently, problems at the system level are addressed rather vaguely. To ensure optimal use of and care with mHealth apps, it is essential to consider all types of problems and barriers. Therefore, researchers and policy makers should have a special focus on this issue to identify the needs for quality assurance.”
+- Problems and Barriers Related to the Use of Digital Health Applications: Scoping Review
+User research:
+This project has been designed after discussion from stakeholders.
+Following Stakeholders have been interviewed:
+Dr’s:
+-	“There is dire need of a platform where doctor and patient can access the bio data and history of patient eighter through biometric or other way.”
+-	“Mostly due to large amount of patients waiting outside, Doctors can’t treat the patient in the best possible way which creates lots of queries in minds of patient unaddressed and sometimes they forget to share something with the doctor so a platform like doctech can help them to ask their queries again without revisit.”
+-	“Most of the time patients don’t get what doctors prescribe them, with the help of doctors can update it online if it is not available on market”?
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## Tools 
+-	Programming Languages:
+1.	PHP
+2.	JavaScript
+-	Front-end:
+1.	React.js
+2.	Tailwindcss
+-	Libraries: 
+1.	Shadcn
+2.	React-Scroll
+3.	React-parallax-tilt
+4.	Inertia.js
+-	Backend:
+1.	MySQL 
+2.	Laravel
+3.	Pusher
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Future Vision
+In addition to the development and implementation of the application, we also recognized the importance of providing ongoing support and maintenance to ensure that the platform remains current, secure, and responsive to user needs. Our team is committed to monitoring user feedback and addressing any issues or concerns that may arise, as well as exploring opportunities for further development and enhancement of the application. This ongoing support and commitment to improvement will help to ensure that our doctor-patient portal application remains a valuable resource for patients and doctors alike.
 
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
